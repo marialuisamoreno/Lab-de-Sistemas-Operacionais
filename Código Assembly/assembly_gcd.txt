@@ -1,0 +1,40 @@
+jp main
+gcd
+ld $r0 $m1
+ld $r1 $m2
+eq $r2 $r1 0
+li $r3 0
+beq LABEL0 $r2 $r3
+ld $r4 $m1
+jp LABEL1
+LABEL0
+ld $r1 $m2
+div $r5 $r0 $r1
+st $r5 $m3
+mt $r6 $r5 $r1
+st $r6 $m4
+sub $r1 $r0 $r6
+st $r1 $m2
+ld $r1 $m2
+st $r1 $m2
+st $r1 $m1
+jp gcd
+chamada_gcd
+ld $r4 $m0
+LABEL1
+jp chamada_gcd
+main
+rd $m7
+ld $r7 $m7
+st $r7 $m5
+rd $m7
+ld $r8 $m7
+st $r8 $m6
+ld $r7 $m5
+ld $r8 $m6
+st $r8 $m2
+st $r7 $m1
+jp gcd
+chamada_gcd
+ld $r4 $m0
+pt $r4

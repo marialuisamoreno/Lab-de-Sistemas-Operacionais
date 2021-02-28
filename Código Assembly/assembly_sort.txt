@@ -1,0 +1,155 @@
+jp main
+minloc
+ld $r0 $m12
+ld $r1 $m13
+ld $r2 $m14
+ld $r3 $m13
+st $r3 $m17
+ld $r0 $m12
+ld $r4 $m13
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r6 $m18
+st $r6 $m19
+ld $r7 $m19
+st $r7 $m16
+li $r9 1
+sum $r8 $r1 $r9
+st $r8 $m15
+LABEL0
+slt $r10 $r8 $r2
+li $r11 0
+beq LABEL1 $r10 $r11
+ld $r0 $m12
+ld $r4 $m15
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r12 $m18
+st $r12 $m20
+slt $r13 $r12 $r7
+li $r11 0
+beq LABEL2 $r13 $r11
+ld $r0 $m12
+ld $r4 $m15
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r14 $m18
+st $r14 $m21
+ld $r7 $m21
+st $r7 $m16
+ld $r3 $m15
+st $r3 $m17
+LABEL2
+li $r9 1
+sum $r8 $r8 $r9
+st $r8 $m15
+jp LABEL0
+LABEL1
+ld $r15 $m17
+jp chamada_minloc
+sort
+ld $r0 $m12
+ld $r1 $m13
+ld $r2 $m14
+ld $r8 $m13
+st $r8 $m15
+LABEL3
+sub $r16 $r2 1
+st $r16 $m22
+slt $r17 $r8 $r16
+li $r11 0
+beq LABEL4 $r17 $r11
+ld $r0 $m12
+ld $r8 $m15
+ld $r2 $m14
+st $r2 $m14
+st $r8 $m13
+st $r0 $m12
+jp minloc
+chamada_minloc
+ld $r3 $m11
+st $r3 $m17
+ld $r0 $m12
+ld $r4 $m17
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r18 $m18
+st $r18 $m24
+ld $r19 $m24
+st $r19 $m23
+ld $r0 $m12
+ld $r4 $m17
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r20 $m18
+st $r20 $m25
+ld $r0 $m12
+ld $r4 $m15
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r21 $m18
+st $r21 $m26
+ld $r20 $m26
+st $r20 $m25
+ld $r0 $m12
+ld $r4 $m15
+sum $r5 $r0 $r4
+st $r5 $m18
+ld $r22 $m18
+st $r22 $m27
+ld $r22 $m23
+st $r22 $m27
+li $r9 1
+sum $r8 $r8 $r9
+st $r8 $m15
+jp LABEL3
+LABEL4
+jp chamada_sort
+main
+li $r8 0
+st $r8 $m15
+LABEL5
+slt $r23 $r8 10
+li $r11 0
+beq LABEL6 $r23 $r11
+ld $r24 $m0
+ld $r4 $m15
+sum $r5 $r24 $r4
+st $r5 $m18
+ld $r25 $m18
+st $r25 $m28
+rd $m29
+ld $r25 $m29
+st $r25 $m28
+li $r9 1
+sum $r8 $r8 $r9
+st $r8 $m15
+jp LABEL5
+LABEL6
+ld $r24 $m0
+ld $r26 $m30
+ld $r27 $m31
+st $r27 $m14
+st $r26 $m13
+st $r24 $m12
+jp sort
+chamada_sort
+li $r8 0
+st $r8 $m15
+LABEL7
+slt $r28 $r8 10
+li $r11 0
+beq LABEL8 $r28 $r11
+ld $r24 $m0
+ld $r4 $m15
+sum $r5 $r24 $r4
+st $r5 $m18
+ld $r29 $m18
+st $r29 $m32
+ld $r29 $m32
+pt $r29
+li $r9 1
+sum $r8 $r8 $r9
+st $r8 $m15
+jp LABEL7
+LABEL8

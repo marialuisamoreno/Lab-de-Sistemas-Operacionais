@@ -1,0 +1,264 @@
+Sintatic Tree:
+
+  Type: INT
+    Id: vet
+      Const: 10
+  Type: INT
+    Id: minloc
+      Type: INT
+        Id: a
+      Type: INT
+        Id: low
+      Type: INT
+        Id: high
+      Type: INT
+        Id: i
+      Type: INT
+        Id: x
+      Type: INT
+        Id: k
+      Assign to: k
+        Id: k
+        Id: low
+      Assign to: x
+        Id: x
+        Id: a
+          Id: low
+      Assign to: i
+        Id: i
+        Op: +
+          Id: low
+          Const: 1
+      While
+        Op: <
+          Id: i
+          Id: high
+        If
+          Op: <
+            Id: a
+              Id: i
+            Id: x
+          Assign to: x
+            Id: x
+            Id: a
+              Id: i
+          Assign to: k
+            Id: k
+            Id: i
+        Assign to: i
+          Id: i
+          Op: +
+            Id: i
+            Const: 1
+      Return
+        Id: k
+  Type: VOID
+    Id: sort
+      Type: INT
+        Id: a
+      Type: INT
+        Id: low
+      Type: INT
+        Id: high
+      Type: INT
+        Id: i
+      Type: INT
+        Id: k
+      Assign to: i
+        Id: i
+        Id: low
+      While
+        Op: <
+          Id: i
+          Op: -
+            Id: high
+            Const: 1
+        Type: INT
+          Id: t
+        Assign to: k
+          Id: k
+          Id: minloc
+            Id: a
+            Id: i
+            Id: high
+        Assign to: t
+          Id: t
+          Id: a
+            Id: k
+        Assign to: a
+          Id: a
+            Id: k
+          Id: a
+            Id: i
+        Assign to: a
+          Id: a
+            Id: i
+          Id: t
+        Assign to: i
+          Id: i
+          Op: +
+            Id: i
+            Const: 1
+  Type: VOID
+    Id: main
+      Type: INT
+        Id: i
+      Assign to: i
+        Id: i
+        Const: 0
+      While
+        Op: <
+          Id: i
+          Const: 10
+        Assign to: vet
+          Id: vet
+            Id: i
+          Id: input
+        Assign to: i
+          Id: i
+          Op: +
+            Id: i
+            Const: 1
+      Id: sort
+        Id: vet
+        Const: 0
+        Const: 10
+      Assign to: i
+        Id: i
+        Const: 0
+      While
+        Op: <
+          Id: i
+          Const: 10
+        Id: output
+          Id: vet
+            Id: i
+        Assign to: i
+          Id: i
+          Op: +
+            Id: i
+            Const: 1
+
+Symbol table:
+
+Variable Name        Location  Declaration      Line Numbers
+-------------------  --------  ---------------  -------------
+main input           21               |       |   39 
+sort low             12        21  (1)|       |   21   23 
+main i               19        36  (1)|       |   36   37   38   39   40   40   43   44   45   46   46 
+GLOBAL main          18        34  (0)|       |   34 
+main output          23               |       |   45 
+GLOBAL sort          10        21  (0)|       |   21 
+GLOBAL minloc        3         6   (1)|       |    6 
+GLOBAL input         0         0   (1)|       |    0 
+sort minloc          17               |       |   26 
+minloc high          6         6   (1)|       |    6   11 
+GLOBAL output        1         0   (0)|       |    0 
+minloc a             4         6   (1)|       |    6    9   12   13 
+sort a               11        21  (1)|       |   21   26   27   28   28   29 
+minloc i             7         7   (1)|       |    7   10   11   12   13   14   16   16 
+main sort            22               |       |   42 
+minloc k             9         7   (1)|       |    7    8   14   18 
+sort i               14        22  (1)|       |   22   23   24   26   28   29   30   30 
+sort k               15        22  (1)|       |   22   26   27   28 
+GLOBAL vet           2         4   (1)|       |    4 
+minloc low           5         6   (1)|       |    6    8    9   10 
+minloc x             8         7   (1)|       |    7    9   12   13 
+sort t               16        25  (1)|       |   25   27   29 
+main vet             20               |       |   39   39   42   45 
+sort high            13        21  (1)|       |   21   24   26 
+
+Intermediate Code:
+
+ALOC_MEN, vet, 10, -
+
+FUNC, INT, minloc, -
+LOAD, a, -, -
+LOAD, low, -, -
+LOAD, high, -, -
+ALOC_MEN, i, 1, -
+ALOC_MEN, x, 1, -
+ALOC_MEN, k, 1, -
+ASSIGN, k, low, -
+ADD, VET0, a, low
+LOAD_ADDRESS, VET0, VET0, -
+ASSIGN, x, VET0, -
+ADD, i, low, 1
+LABEL, LABEL0, -, -
+SLT, AUX0, i, high
+IF_NOT, AUX0, LABEL1, -
+ADD, VET1, a, i
+LOAD_ADDRESS, VET1, VET1, -
+SLT, AUX1, VET1, x
+IF_NOT, AUX1, LABEL2, -
+ADD, VET2, a, i
+LOAD_ADDRESS, VET2, VET2, -
+ASSIGN, x, VET2, -
+ASSIGN, k, i, -
+LABEL, LABEL2, -, -
+ADD, i, i, 1
+JUMP, LABEL0, -, -
+LABEL, LABEL1, -, -
+JR, k, -, -
+
+FUNC, VOID, sort, -
+LOAD, a, -, -
+LOAD, low, -, -
+LOAD, high, -, -
+ALOC_MEN, i, 1, -
+ALOC_MEN, k, 1, -
+ASSIGN, i, low, -
+LABEL, LABEL3, -, -
+SUB, AUX2, high, 1
+SLT, AUX3, i, AUX2
+IF_NOT, AUX3, LABEL4, -
+ALOC_MEN, t, 1, -
+PARAM, a, -, -
+PARAM, i, -, -
+PARAM, high, -, -
+CALL, minloc, 3, -
+ASSIGN, k, minloc, -
+ADD, VET3, a, k
+LOAD_ADDRESS, VET3, VET3, -
+ASSIGN, t, VET3, -
+ADD, VET4, a, k
+LOAD_ADDRESS, VET4, VET4, -
+ADD, VET5, a, i
+LOAD_ADDRESS, VET5, VET5, -
+ASSIGN, VET4, VET5, -
+ADD, VET6, a, i
+LOAD_ADDRESS, VET6, VET6, -
+ASSIGN, VET6, t, -
+ADD, i, i, 1
+JUMP, LABEL3, -, -
+LABEL, LABEL4, -, -
+
+FUNC, VOID, main, -
+ALOC_MEN, i, 1, -
+ASSIGN, i, 0, -
+LABEL, LABEL5, -, -
+SLT, AUX4, i, 10
+IF_NOT, AUX4, LABEL6, -
+ADD, VET7, vet, i
+LOAD_ADDRESS, VET7, VET7, -
+CALL, input, 0, -
+ASSIGN, VET7, input, -
+ADD, i, i, 1
+JUMP, LABEL5, -, -
+LABEL, LABEL6, -, -
+PARAM, vet, -, -
+PARAM, 0, -, -
+PARAM, 10, -, -
+CALL, sort, 3, -
+ASSIGN, i, 0, -
+LABEL, LABEL7, -, -
+SLT, AUX5, i, 10
+IF_NOT, AUX5, LABEL8, -
+ADD, VET8, vet, i
+LOAD_ADDRESS, VET8, VET8, -
+PARAM, VET8, -, -
+CALL, output, 1, -
+ADD, i, i, 1
+JUMP, LABEL7, -, -
+LABEL, LABEL8, -, -
+

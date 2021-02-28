@@ -1,0 +1,129 @@
+Sintatic Tree:
+
+  Type: INT
+    Id: fibonacci
+      Type: INT
+        Id: n
+      Type: INT
+        Id: a
+      Type: INT
+        Id: b
+      Type: INT
+        Id: x
+      Type: INT
+        Id: i
+      Assign to: a
+        Id: a
+        Const: 1
+      Assign to: b
+        Id: b
+        Const: 1
+      Assign to: i
+        Id: i
+        Const: 3
+      If
+        Op: =
+          Id: n
+          Const: 1
+        Assign to: x
+          Id: x
+          Id: a
+      If
+        Op: =
+          Id: n
+          Const: 2
+        Assign to: x
+          Id: x
+          Id: b
+      While
+        Op: <=
+          Id: i
+          Id: n
+        Assign to: x
+          Id: x
+          Op: +
+            Id: a
+            Id: b
+        Assign to: a
+          Id: a
+          Id: b
+        Assign to: b
+          Id: b
+          Id: x
+      Return
+        Id: x
+  Type: VOID
+    Id: main
+      Type: INT
+        Id: x
+      Type: INT
+        Id: n
+      Assign to: n
+        Id: n
+        Id: input
+      Assign to: x
+        Id: x
+        Id: fibonacci
+          Id: n
+      Id: output
+        Id: x
+
+Symbol table:
+
+Variable Name        Location  Declaration      Line Numbers
+-------------------  --------  ---------------  -------------
+main input           11               |       |   26 
+main n               10        24  (1)|       |   24   26   27 
+main x               9         23  (1)|       |   23   27   29 
+GLOBAL main          8         22  (0)|       |   22 
+GLOBAL fibonacci     2         1   (1)|       |    1 
+main fibonacci       12               |       |   27 
+main output          13               |       |   29 
+GLOBAL input         0         0   (1)|       |    0 
+GLOBAL output        1         0   (0)|       |    0 
+fibonacci a          4         2   (1)|       |    2    7   11   15   16 
+fibonacci b          5         3   (1)|       |    3    8   12   15   16   17 
+fibonacci i          7         5   (1)|       |    5    9   14 
+fibonacci n          3         1   (1)|       |    1   11   12   14 
+fibonacci x          6         4   (1)|       |    4   11   12   15   17   19 
+
+Intermediate Code:
+
+FUNC, INT, fibonacci, -
+LOAD, n, -, -
+ALOC_MEN, a, 1, -
+ALOC_MEN, b, 1, -
+ALOC_MEN, x, 1, -
+ALOC_MEN, i, 1, -
+ASSIGN, a, 1, -
+ASSIGN, b, 1, -
+ASSIGN, i, 3, -
+EQUAL, AUX0, n, 1
+IF_NOT, AUX0, LABEL0, -
+ASSIGN, x, a, -
+LABEL, LABEL0, -, -
+EQUAL, AUX1, n, 2
+IF_NOT, AUX1, LABEL1, -
+ASSIGN, x, b, -
+LABEL, LABEL1, -, -
+LABEL, LABEL2, -, -
+SLTE, AUX2, i, n
+IF_NOT, AUX2, LABEL3, -
+ADD, x, a, b
+ASSIGN, a, b, -
+ASSIGN, b, x, -
+JUMP, LABEL2, -, -
+LABEL, LABEL3, -, -
+JR, x, -, -
+
+FUNC, VOID, main, -
+ALOC_MEN, x, 1, -
+ALOC_MEN, n, 1, -
+CALL, input, 0, -
+ASSIGN, n, input, -
+PARAM, n, -, -
+CALL, fibonacci, 1, -
+ASSIGN, x, fibonacci, -
+PARAM, x, -, -
+CALL, output, 1, -
+

@@ -1,0 +1,60 @@
+jp main
+fibonacci
+ld $r0 $m1
+li $r1 1
+st $r1 $m2
+li $r2 1
+st $r2 $m3
+li $r3 3
+st $r3 $m5
+eq $r4 $r0 1
+li $r5 0
+beq LABEL0 $r4 $r5
+ld $r6 $m2
+st $r6 $m4
+LABEL0
+eq $r7 $r0 2
+li $r5 0
+beq LABEL1 $r7 $r5
+ld $r6 $m3
+st $r6 $m4
+LABEL1
+LABEL2
+slt $r8 $r3 $r0
+li $r9 1
+beq linha_atual+2 $r8 $r9
+eq $r8 $r3 $r0
+li $r5 0
+beq LABEL3 $r8 $r5
+sum $r6 $r1 $r2
+st $r6 $m4
+ld $r1 $m3
+st $r1 $m2
+ld $r2 $m4
+st $r2 $m3
+jp LABEL2
+LABEL3
+ld $r10 $m4
+jp chamada_fibonacci
+main
+rd $m8
+ld $r6 $m8
+st $r6 $m4
+rd $m8
+ld $r11 $m8
+st $r11 $m6
+sum $r12 $r6 $r11
+st $r12 $m7
+ld $r12 $m7
+pt $r12
+rd $m8
+ld $r0 $m8
+st $r0 $m1
+ld $r0 $m1
+st $r0 $m1
+jp fibonacci
+chamada_fibonacci
+ld $r1 $m0
+st $r1 $m2
+ld $r1 $m2
+pt $r1
